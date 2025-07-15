@@ -1,18 +1,21 @@
-import NextAuth from "next-auth"
+import NextAuth from "next-auth";
 
 declare module "next-auth" {
-
-    interface User{
-        username: string  | null
-    }
+  interface User {
+    username: string | null;
+  }
 
   interface Session {
     user: {
-      username: ReactNode
-      address: string
-    }
-    token:{
-        username: string
-    }
+      name?: string;             // from OAuth or database
+      email?: string;
+      username?: string | null;
+    };
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    username?: string | null;
   }
 }
