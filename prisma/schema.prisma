@@ -55,16 +55,16 @@ model Session {
 
 model User {
   id            String    @id @default(cuid())
-  username      String?   @unique
-  password      String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
   name          String?
+  username      String?   @unique
   email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
+  password      String?
+  emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
   @@map("users")
 }
