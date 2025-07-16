@@ -1,13 +1,9 @@
 import { buttonVariants } from "@/components/ui/button";
 import Particles from "@/components/ui/Particles";
-import User from "@/components/User";
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 
 export default async function Home() {
-  const session = await getServerSession(authOptions)
 
   return (
     <div className="relative min-h-screen overflow-hidden ">

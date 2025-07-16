@@ -8,7 +8,7 @@ const userSchema = z
     .object({
         username: z.string().min(1, 'Username is required').max(50),
         email: z.string().min(1, 'Email is required').email('Invalid email'),
-        password: z.string().min(1, 'Password is required').min(8, 'Passsword must have more than 8 character'),
+        password: z.string().min(1, 'Password is required').min(8, 'Password must have more than 8 characters'),
     })
 
 export async function POST(req: Request) {
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
             }
         })
 
-        const { password: newUserPassword, ...rest } = newUser
+        const { password: _newUserPassword, ...rest } = newUser
 
         return NextResponse.json({ user: rest, message: "User created successfully" }, { status: 201 });
     } catch (error) {

@@ -9,7 +9,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import GoogleSignInButton from "../GoogleSignInButton";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 
@@ -20,7 +20,7 @@ const FormSchema = z.object({
 
 
 const SignInForm = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -45,7 +45,8 @@ const SignInForm = () => {
       window.location.href = "/admin";
     }
     } catch (error) {
-      toast.error("Somethig went wrong")
+      console.log(error);
+      toast.error("Somethig went wrong");
     }
     
   };
