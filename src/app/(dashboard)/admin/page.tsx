@@ -1,7 +1,7 @@
 import AdminContent from "@/components/AdminContext";
 import { authOptions } from "@/lib/auth";
  
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 
 const Page = async () => {
   const session = await getServerSession(authOptions);

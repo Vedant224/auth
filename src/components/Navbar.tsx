@@ -2,7 +2,7 @@
 import Link from "next/link"
 import { buttonVariants } from "./ui/button"
 import { MapPin } from "lucide-react"
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import UserAccountnav from "./UserAccountnav";
 
