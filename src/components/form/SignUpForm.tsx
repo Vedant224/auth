@@ -10,6 +10,7 @@ import Link from "next/link";
 import GoogleSignInButton from "../GoogleSignInButton";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useState } from "react";
 
 
 const FormSchema = z
@@ -26,6 +27,7 @@ const FormSchema = z
 
 
 const SignUpForm = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -38,22 +40,30 @@ const SignUpForm = () => {
     });
 
     const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-        const response = await fetch('/api/user', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: values.username,
-                email: values.email,
-                password: values.password,
+        setIsLoading(true);
+        try {
+            const response = await fetch('/api/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: values.username,
+                    email: values.email,
+                    password: values.password,
+                })
             })
-        })
-        if (response.ok) {
-            router.push('/sign-in')
-        }
-        else{
-            toast.error('Registration failed');
+            if (response.ok) {
+                router.push('/sign-in')
+            }
+            else {
+                toast.error('Registration failed');
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error('Something went wrong');
+        } finally {
+            setIsLoading(false);
         }
 
     }
@@ -116,7 +126,20 @@ const SignUpForm = () => {
                         )}
                     />
                 </div>
-                <Button variant="secondary" className="w-full mt-6" type="submit">Sign Up</Button>
+                <Button variant="secondary" className="w-full mt-6" type="submit" disabled={isLoading}>
+                    {isLoading && (
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-4 w-4 mr-2 animate-spin"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                        </svg>
+                    )}
+                    Sign Up
+                </Button>
             </form>
             <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400 text-black'>
                 or

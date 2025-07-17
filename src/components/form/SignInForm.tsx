@@ -11,6 +11,7 @@ import GoogleSignInButton from "../GoogleSignInButton";
 import { signIn } from "next-auth/react";
 // import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useState } from "react";
 
 
 const FormSchema = z.object({
@@ -21,34 +22,38 @@ const FormSchema = z.object({
 
 const SignInForm = () => {
   // const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-    email: "",  
-    password: "",
-  },
+      email: "",
+      password: "",
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+    setIsLoading(true);
     try {
-      const signInData = await signIn('credentials',{
-      email:values.email,
-      password:values.password,
-      redirect:false,
-    })
-    if(signInData?.error){
-      toast("Invalid email or password")
-    }
-    else{
-      // router.refresh();
-      // router.push('/admin');
-      window.location.href = "/admin";
-    }
+      const signInData = await signIn('credentials', {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      })
+      if (signInData?.error) {
+        toast("Invalid email or password")
+        setIsLoading(false);
+      }
+      else {
+        // router.refresh();
+        // router.push('/admin');
+        window.location.href = "/admin";
+      }
     } catch (error) {
       console.log(error);
       toast.error("Somethig went wrong");
+      setIsLoading(false);
     }
-    
+
   };
 
   return (
@@ -75,7 +80,7 @@ const SignInForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="pb-2">Password</FormLabel>
-                <FormControl  className=" border-black rounded-full">
+                <FormControl className=" border-black rounded-full">
                   <Input type="password" placeholder="Enter your Password" {...field} />
                 </FormControl>
                 <FormMessage />
@@ -83,7 +88,19 @@ const SignInForm = () => {
             )}
           />
         </div>
-        <Button variant="secondary" className="w-full mt-6" type="submit">Sign in</Button>
+        <Button variant="secondary" className="w-full mt-6" type="submit" disabled={isLoading}>
+          {isLoading && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4 mr-2 animate-spin"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+            </svg>
+          )}
+          Sign in</Button>
       </form>
       <div className='mx-auto my-4 flex w-full text-black items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400'>
         or
