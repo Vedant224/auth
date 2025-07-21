@@ -1,4 +1,4 @@
-# 🔐 Next.js Authentication App (NextAuth + Supabase + Particles)
+# Next.js Authentication App (NextAuth + Supabase )
 
 This is a simple authentication-only web app built with:
 
@@ -21,7 +21,7 @@ This is a simple authentication-only web app built with:
 
 ---
 
-## 💪 Setup Instructions
+## Setup Instructions
 
 ### 1. Clone the Repo
 
@@ -49,7 +49,7 @@ NEXTAUTH_SECRET=your-secret-string
 NEXTAUTH_URL=http://localhost:3000
 ```
 
-> 💡 You can get the `DATABASE_URL` from Supabase → Project → Settings → Database → Connection Info.
+>  You can get the `DATABASE_URL` from Supabase → Project → Settings → Database → Connection Info.
 
 ---
 
@@ -74,7 +74,7 @@ Visit [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🧰 Authentication Pages
+##  Authentication Pages
 
 * `/sign-in` → Login page
 * `/sign-up` → (Optional) Registration page
