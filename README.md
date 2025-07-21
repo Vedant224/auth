@@ -10,7 +10,7 @@ This is a simple authentication-only web app built with:
 
 ---
 
-## ✨ Features
+##  Features
 
 * Email/password login via **NextAuth Credentials Provider**
 * Session-based auth with JWT
@@ -82,7 +82,7 @@ Visit [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🎇 Particle Background
+## Particle Background
 
 This app includes an animated WebGL background using OGL:
 
@@ -92,7 +92,7 @@ This app includes an animated WebGL background using OGL:
 
 ---
 
-## 🧾 `.env.example`
+## `.env.example`
 
 Include this file when sharing:
 
@@ -106,7 +106,7 @@ GOOGLE_CLIENT_ID=your-google-clientid
 GOOGLE_CLIENT_SECRET=your-google-clientsecret
 ```
 
-## 🧐 Tech Stack
+## Tech Stack
 
 | Tool         | Purpose                        |
 | ------------ | ------------------------------ |
